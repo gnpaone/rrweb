@@ -57,6 +57,7 @@
     "puppeteer": "^20.9.0"
   },
   "peerDependencies": {
-    "rrweb": "^2.0.1-alpha.20"
+    "rrweb": "^2.0.1-alpha.20",
+    "@rrweb/utils": "^2.0.1-alpha.20"
   }
 }
