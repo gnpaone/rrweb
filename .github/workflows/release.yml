@@ -24,6 +24,7 @@ jobs:
           cache: 'yarn'
           registry-url: https://gitea.midpathsoftware.com/api/packages/gnpaone/npm
           always-auth: true
+          scope: ''
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
