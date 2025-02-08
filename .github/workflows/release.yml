@@ -25,7 +25,7 @@ jobs:
           cache: 'yarn'
           registry-url: https://gitea.midpathsoftware.com/api/packages/gnpaone/npm
           always-auth: true
-          scope: ''
+          scope: '@rrweb'
 
       - run: |
           # Define the .npmrc file path
