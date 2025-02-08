@@ -25,59 +25,24 @@ jobs:
           cache: 'yarn'
           registry-url: https://gitea.midpathsoftware.com/api/packages/gnpaone/npm
           always-auth: true
-          scope: '@rrweb'
 
-      - run: |
-          # Define the .npmrc file path
-          NPMRC_FILE="$RUNNER_TEMP/.npmrc"
-          
-          # Check if the file exists
-          if [[ -f "$NPMRC_FILE" ]]; then
-              cat "$NPMRC_FILE"
-          else
-              echo "Error: .npmrc file not found in $RUNNER_TEMP"
-              exit 1
-          fi
-
-      # - name: Install Dependencies
-      #   run: yarn install --frozen-lockfile
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Set registry settings
         run: |
-          cat << EOF > "$HOME/.npmrc"
+          cat << EOF > "$RUNNER_TEMP/.npmrc"
+            //gitea.midpathsoftware.com/api/packages/gnpaone/npm/:_authToken=${NODE_AUTH_TOKEN}
             registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
             @rrweb:registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
-            //gitea.midpathsoftware.com/api/packages/gnpaone/npm/:_authToken="${NODE_AUTH_TOKEN}"
-            //gitea.midpathsoftware.com/api/packages/gnpaone/npm/:always-auth=true
+            always-auth=true
           EOF
 
-      - run: |
-          NPMRC_FILE="$HOME/.npmrc"
-          
-          # Check if the file exists
-          if [[ -f "$NPMRC_FILE" ]]; then
-              cat "$NPMRC_FILE"
-          fi
-
-      - run: |
-          CURRENT_DIR=$(pwd)
-
-          # Define the .npmrc file path
-          NPMRC_FILE="$CURRENT_DIR/.npmrc"
-          
-          # Check if the file exists
-          if [[ -f "$NPMRC_FILE" ]]; then
-              cat "$NPMRC_FILE"
-          else
-              echo "Error: .npmrc file not found in $CURRENT_DIR"
-              exit 1
-          fi
-
-      # - name: Create Release Pull Request or Publish to npm
-      #   id: changesets
-      #   uses: changesets/action@v1
-      #   with:
-      #     publish: yarn run release
-      #   env:
-      #     NODE_OPTIONS: '--max-old-space-size=4096'
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: yarn run release
+        env:
+          NODE_OPTIONS: '--max-old-space-size=4096'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
