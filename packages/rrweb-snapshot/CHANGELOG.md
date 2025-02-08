@@ -1,15 +1,5 @@
 # rrweb-snapshot
 
-## 2.0.1-alpha.21
-
-### Patch Changes
-
-- [`4309de7`](https://github.com/rrweb-io/rrweb/commit/4309de74d28834b611028d185a81eaa4668d4e43) Thanks [@gnpaone](https://github.com/gnpaone)! - Handle exceptions thrown from postcss when calling adaptCssForReplay
-
-- [`4309de7`](https://github.com/rrweb-io/rrweb/commit/4309de74d28834b611028d185a81eaa4668d4e43) Thanks [@gnpaone](https://github.com/gnpaone)! - Improve performance of splitCssText for <style> elements with large css content - see #1603
-
-- [`4309de7`](https://github.com/rrweb-io/rrweb/commit/4309de74d28834b611028d185a81eaa4668d4e43) Thanks [@gnpaone](https://github.com/gnpaone)! - #1575 Fix that postcss could fall over when trying to process css content split arbitrarily
-
 ## 2.0.1-alpha.20
 
 ## 2.0.1-alpha.19
