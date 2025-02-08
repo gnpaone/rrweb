@@ -28,16 +28,14 @@ jobs:
           scope: ''
 
       - run: |
-          CURRENT_DIR=$(pwd)
-
           # Define the .npmrc file path
-          NPMRC_FILE="$CURRENT_DIR/.npmrc"
+          NPMRC_FILE="$RUNNER_TEMP/.npmrc"
           
           # Check if the file exists
           if [[ -f "$NPMRC_FILE" ]]; then
               cat "$NPMRC_FILE"
           else
-              echo "Error: .npmrc file not found in $CURRENT_DIR"
+              echo "Error: .npmrc file not found in $RUNNER_TEMP"
               exit 1
           fi
 
@@ -54,6 +52,14 @@ jobs:
           EOF
 
       - run: |
+          NPMRC_FILE="$HOME/.npmrc"
+          
+          # Check if the file exists
+          if [[ -f "$NPMRC_FILE" ]]; then
+              cat "$NPMRC_FILE"
+          fi
+
+      - run: |
           CURRENT_DIR=$(pwd)
 
           # Define the .npmrc file path
@@ -65,14 +71,6 @@ jobs:
           else
               echo "Error: .npmrc file not found in $CURRENT_DIR"
               exit 1
-          fi
-
-      - run: |
-          NPMRC_FILE="$HOME/.npmrc"
-          
-          # Check if the file exists
-          if [[ -f "$NPMRC_FILE" ]]; then
-              cat "$NPMRC_FILE"
           fi
 
       # - name: Create Release Pull Request or Publish to npm
