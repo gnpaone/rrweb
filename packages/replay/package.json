@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "@rrweb/types": "^2.0.1-alpha.21",
-    "rrweb": "^2.0.1-alpha.21"
+    "@rrweb/rrweb": "^2.0.1-alpha.21"
   },
   "browserslist": [
     "supports es6-class"

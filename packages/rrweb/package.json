@@ -1,5 +1,5 @@
 {
-  "name": "rrweb",
+  "name": "@rrweb/rrweb",
   "version": "2.0.1-alpha.21",
   "publishConfig": {
     "access": "public",
@@ -24,7 +24,7 @@
     "build": "yarn turbo run prepublish",
     "check-types": "tsc -noEmit",
     "prepublish": "tsc -noEmit && vite build",
-    "lint": "yarn eslint src",
+    "lint": "yarn eslin@rrweb/t src",
     "benchmark": "vitest run --maxConcurrency 1 --no-file-parallelism test/benchmark"
   },
   "type": "module",
@@ -90,7 +90,7 @@
     "@xstate/fsm": "^1.4.0",
     "base64-arraybuffer": "^1.0.1",
     "mitt": "^3.0.0",
-    "rrdom": "^2.0.1-alpha.21",
-    "rrweb-snapshot": "^2.0.1-alpha.21"
+    "@rrweb/rrdom": "^2.0.1-alpha.21",
+    "@rrweb/rrweb-snapshot": "^2.0.1-alpha.21"
   }
 }

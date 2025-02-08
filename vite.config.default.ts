@@ -118,6 +118,16 @@ export default function (
   let formats: LibraryFormats[] = ['es', 'cjs'];
 
   return defineConfig(() => ({
+    resolve: {
+      alias: {
+        'rrdom': '@rrweb/rrdom',
+        'rrdom-nodejs': '@rrweb/rrdom-nodejs',
+        'rrvideo': '@rrweb/rrvideo',
+        'rrweb': '@rrweb/rrweb',
+        'rrweb-player': '@rrweb/rrweb-player',
+        'rrweb-snapshot': '@rrweb/rrweb-snapshot',
+      },
+    },
     build: {
       // See https://vitejs.dev/guide/build.html#library-mode
       lib: {
