@@ -1,5 +1,15 @@
 # @rrweb/rrweb-plugin-console-record
 
+## 2.0.1-alpha.21
+
+### Patch Changes
+
+- [`4309de7`](https://github.com/rrweb-io/rrweb/commit/4309de74d28834b611028d185a81eaa4668d4e43) Thanks [@gnpaone](https://github.com/gnpaone)! - Move patch function into @rrweb/utils to improve bundling
+
+- Updated dependencies [[`4309de7`](https://github.com/rrweb-io/rrweb/commit/4309de74d28834b611028d185a81eaa4668d4e43), [`4309de7`](https://github.com/rrweb-io/rrweb/commit/4309de74d28834b611028d185a81eaa4668d4e43), [`4309de7`](https://github.com/rrweb-io/rrweb/commit/4309de74d28834b611028d185a81eaa4668d4e43)]:
+  - rrweb@2.0.1-alpha.21
+  - @rrweb/utils@2.0.1-alpha.21
+
 ## 2.0.1-alpha.20
 
 ### Patch Changes
