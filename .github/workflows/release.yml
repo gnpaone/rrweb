@@ -35,6 +35,7 @@ jobs:
             //gitea.midpathsoftware.com/api/packages/gnpaone/npm/:_authToken=${NODE_AUTH_TOKEN}
             registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
             @rrweb:registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
+            @*:registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
             always-auth=true
           EOF
 
