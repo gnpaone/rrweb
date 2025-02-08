@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: lts/*
           cache: 'yarn'
-          registry-url: https://gitea.midpathsoftware.com/api/packages/gnpaone/npm
+          registry-url: https://gitea.demo.cloudron.io/api/packages/cloudron/npm
           always-auth: true
 
       - name: Install Dependencies
@@ -33,10 +33,10 @@ jobs:
       - name: Set registry settings
         run: |
           cat << EOF > "$RUNNER_TEMP/.npmrc"
-            //gitea.midpathsoftware.com/api/packages/gnpaone/npm/:_authToken=${NODE_AUTH_TOKEN}
-            registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
-            @rrweb:registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
-            @*:registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
+            //gitea.demo.cloudron.io/api/packages/cloudron/npm/:_authToken=${NODE_AUTH_TOKEN}
+            registry=https://gitea.demo.cloudron.io/api/packages/cloudron/npm/
+            @rrweb:registry=https://gitea.demo.cloudron.io/api/packages/cloudron/npm/
+            @*:registry=https://gitea.demo.cloudron.io/api/packages/cloudron/npm/
             always-auth=true
           EOF
 

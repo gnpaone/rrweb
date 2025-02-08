@@ -3,7 +3,7 @@
   "version": "2.0.1-alpha.21",
   "publishConfig": {
     "access": "public",
-    "registry": "https://gitea.midpathsoftware.com/api/packages/gnpaone/npm"
+    "registry": "https://gitea.demo.cloudron.io/api/packages/cloudron/npm"
   },
   "keywords": [
     "rrweb",
