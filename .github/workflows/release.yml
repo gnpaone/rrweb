@@ -22,11 +22,19 @@ jobs:
           cache: 'yarn'
           registry-url: https://gitea.midpathsoftware.com/api/packages/gnpaone/npm
           always-auth: true
+          scope: '@rrweb'
         env:
            NODE_AUTH_TOKEN: ${{ secrets.GITEA_NPM_REGISTRY }}
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Manual Login to NPM Registry
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITEA_NPM_REGISTRY }}
+        run: |
+          echo -e "${NODE_AUTH_TOKEN}\n\n\n" | npm login --registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm
+
 
       - name: Set registry settings
         env:
