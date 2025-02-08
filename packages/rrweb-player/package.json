@@ -3,10 +3,10 @@
   "version": "2.0.1-alpha.20",
   "publishConfig": {
     "access": "public",
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://gitea.midpathsoftware.com/api/packages/gnpaone/npm"
   },
   "devDependencies": {
-    "@rrweb/types": "github:Midpath-Software/rrweb#@rrweb/types",
+    "@rrweb/types": "^2.0.1-alpha.20",
     "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/package": "^2.0.0",
@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "@tsconfig/svelte": "^1.0.0",
-    "@rrweb/replay": "github:Midpath-Software/rrweb#@rrweb/replay",
-    "@rrweb/packer": "github:Midpath-Software/rrweb#@rrweb/packer"
+    "@rrweb/replay": "^2.0.1-alpha.20",
+    "@rrweb/packer": "^2.0.1-alpha.20"
   },
   "scripts": {
     "dev": "vite build --watch",

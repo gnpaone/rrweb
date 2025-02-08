@@ -28,9 +28,9 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.GITEA_NPM_REGISTRY }}
         run: |
-          npm config set registry https://gitea.midpathsoftware.com
-          echo "//gitea.midpathsoftware.com/:_authToken=$NPM_TOKEN" > "$HOME/.npmrc"
-          echo '@rrweb:registry=https://gitea.midpathsoftware.com/' >> "$HOME/.npmrc"          
+          npm config set registry https://gitea.midpathsoftware.com/api/packages/gnpaone/npm
+          echo "//gitea.midpathsoftware.com/api/packages/gnpaone/npm/:_authToken=$NPM_TOKEN" > "$HOME/.npmrc"
+          echo '@rrweb:registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/' >> "$HOME/.npmrc"
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets

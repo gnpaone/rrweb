@@ -3,7 +3,7 @@
   "version": "2.0.1-alpha.20",
   "publishConfig": {
     "access": "public",
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://gitea.midpathsoftware.com/api/packages/gnpaone/npm"
   },
   "keywords": [
     "rrweb",

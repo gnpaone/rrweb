@@ -3,7 +3,7 @@
   "version": "2.0.1-alpha.20",
   "publishConfig": {
     "access": "public",
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://gitea.midpathsoftware.com/api/packages/gnpaone/npm"
   },
   "description": "",
   "type": "module",
@@ -47,12 +47,12 @@
   },
   "homepage": "https://github.com/Midpath-Software/rrweb#readme",
   "devDependencies": {
-    "rrweb": "github:Midpath-Software/rrweb#rrweb",
+    "rrweb": "^2.0.1-alpha.20",
     "typescript": "^5.4.5",
     "vite": "^5.3.1",
     "vite-plugin-dts": "^3.9.1"
   },
   "peerDependencies": {
-    "rrweb": "github:Midpath-Software/rrweb#rrweb"
+    "rrweb": "^2.0.1-alpha.20"
   }
 }
