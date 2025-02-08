@@ -69,62 +69,62 @@ jobs:
           tarnames=$(find built-packages -name "*.tgz" -exec basename {} .tgz \; | jq -R -s -c 'split("\n")[:-1]')
           echo "tarnames=$tarnames" >> $GITHUB_OUTPUT
 
-  # publish:
-  #   name: Publish
-  #   needs: build
-  #   strategy:
-  #     matrix:
-  #       tarname: ${{ fromJson(needs.build.outputs.tarnames) }}
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout Repo
-  #       uses: actions/checkout@v4
+  publish:
+    name: Publish
+    needs: build
+    strategy:
+      matrix:
+        tarname: ${{ fromJson(needs.build.outputs.tarnames) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
 
-  #     - name: Setup Git
-  #       run: |
-  #         git config --global --add safe.directory '/github/workspace'
-  #         git config --global user.name "github-actions[bot]"
-  #         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Setup Git
+        run: |
+          git config --global --add safe.directory '/github/workspace'
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-  #     - name: Set Branch Name
-  #       run: |
-  #         tarname="${{ matrix.tarname }}"
-  #         targetBranch=$(echo "$tarname" | sed 's/_/\//g')
-  #         echo "targetBranch=$targetBranch" >> $GITHUB_ENV
-  #         echo "sourceBranch=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
+      - name: Set Branch Name
+        run: |
+          tarname="${{ matrix.tarname }}"
+          targetBranch=$(echo "$tarname" | sed 's/_/\//g')
+          echo "targetBranch=$targetBranch" >> $GITHUB_ENV
+          echo "sourceBranch=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
 
-  #     - name: Checkout or Create Orphan Branch
-  #       run: |
-  #         if git ls-remote --exit-code --heads origin "${{ env.targetBranch }}"; then
-  #           echo "Branch ${{ env.targetBranch }} already exists."
-  #           git fetch origin "${{ env.targetBranch }}"
-  #           git checkout "${{ env.targetBranch }}"
-  #           if [ -n "$(git ls-files)" ]; then
-  #               git rm -rf .
-  #           fi
-  #         else
-  #           echo "Creating orphan branch ${{ env.targetBranch }}"
-  #           git checkout --orphan "${{ env.targetBranch }}"
-  #           git rm -rf .
-  #           git commit --allow-empty -m "Initial commit"
-  #           git push origin "${{ env.targetBranch }}"
-  #         fi
+      - name: Checkout or Create Orphan Branch
+        run: |
+          if git ls-remote --exit-code --heads origin "${{ env.targetBranch }}"; then
+            echo "Branch ${{ env.targetBranch }} already exists."
+            git fetch origin "${{ env.targetBranch }}"
+            git checkout "${{ env.targetBranch }}"
+            if [ -n "$(git ls-files)" ]; then
+                git rm -rf .
+            fi
+          else
+            echo "Creating orphan branch ${{ env.targetBranch }}"
+            git checkout --orphan "${{ env.targetBranch }}"
+            git rm -rf .
+            git commit --allow-empty -m "Initial commit"
+            git push origin "${{ env.targetBranch }}"
+          fi
 
-  #     - name: Download Built Packages
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: built-packages
+      - name: Download Built Packages
+        uses: actions/download-artifact@v4
+        with:
+          name: built-packages
 
-  #     - name: Extract Package Contents
-  #       run: |
-  #         mkdir -p tmp
-  #         tar -xzf "${{ matrix.tarname }}.tgz" -C tmp
-  #         cp -r tmp/package/* .
-  #         rm -rf tmp *.tgz
+      - name: Extract Package Contents
+        run: |
+          mkdir -p tmp
+          tar -xzf "${{ matrix.tarname }}.tgz" -C tmp
+          cp -r tmp/package/* .
+          rm -rf tmp *.tgz
 
-  #     - name: Commit and Push
-  #       run: |
-  #         git add .
-  #         git commit -m "Publish ${{ env.targetBranch }} package"
-  #         git push --force origin "${{ env.targetBranch }}"
-  #         git checkout --force "${{ env.sourceBranch }}"
+      - name: Commit and Push
+        run: |
+          git add .
+          git commit -m "Publish ${{ env.targetBranch }} package"
+          git push --force origin "${{ env.targetBranch }}"
+          git checkout --force "${{ env.sourceBranch }}"
