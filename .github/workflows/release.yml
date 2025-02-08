@@ -24,7 +24,6 @@ jobs:
           cache: 'yarn'
           registry-url: https://gitea.midpathsoftware.com/api/packages/gnpaone/npm
           always-auth: true
-          scope: '@rrweb'
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
@@ -35,6 +34,7 @@ jobs:
             registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
             @rrweb:registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
             //gitea.midpathsoftware.com/api/packages/gnpaone/npm/:_authToken="${NODE_AUTH_TOKEN}"
+            //gitea.midpathsoftware.com/api/packages/gnpaone/npm/:always-auth=true
           EOF
 
       - name: Create Release Pull Request or Publish to npm
