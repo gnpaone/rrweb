@@ -26,8 +26,22 @@ jobs:
           always-auth: true
           scope: ''
 
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+      - run: |
+          CURRENT_DIR=$(pwd)
+
+          # Define the .npmrc file path
+          NPMRC_FILE="$CURRENT_DIR/.npmrc"
+          
+          # Check if the file exists
+          if [[ -f "$NPMRC_FILE" ]]; then
+              cat "$NPMRC_FILE"
+          else
+              echo "Error: .npmrc file not found in $CURRENT_DIR"
+              exit 1
+          fi
+
+      # - name: Install Dependencies
+      #   run: yarn install --frozen-lockfile
 
       - name: Set registry settings
         run: |
@@ -37,6 +51,28 @@ jobs:
             //gitea.midpathsoftware.com/api/packages/gnpaone/npm/:_authToken="${NODE_AUTH_TOKEN}"
             //gitea.midpathsoftware.com/api/packages/gnpaone/npm/:always-auth=true
           EOF
+
+      - run: |
+          CURRENT_DIR=$(pwd)
+
+          # Define the .npmrc file path
+          NPMRC_FILE="$CURRENT_DIR/.npmrc"
+          
+          # Check if the file exists
+          if [[ -f "$NPMRC_FILE" ]]; then
+              cat "$NPMRC_FILE"
+          else
+              echo "Error: .npmrc file not found in $CURRENT_DIR"
+              exit 1
+          fi
+
+      - run: |
+          NPMRC_FILE="$HOME/.npmrc"
+          
+          # Check if the file exists
+          if [[ -f "$NPMRC_FILE" ]]; then
+              cat "$NPMRC_FILE"
+          fi
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
