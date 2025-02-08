@@ -11,6 +11,8 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.GITEA_NPM_REGISTRY }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -20,29 +22,17 @@ jobs:
         with:
           node-version: lts/*
           cache: 'yarn'
-          registry-url: https://gitea.midpathsoftware.com/api/packages/gnpaone/npm
-          always-auth: true
-          scope: '@rrweb'
-        env:
-           NODE_AUTH_TOKEN: ${{ secrets.GITEA_NPM_REGISTRY }}
 
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Manual Login to NPM Registry
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITEA_NPM_REGISTRY }}
-        run: |
-          echo -e "${NODE_AUTH_TOKEN}\n\n\n" | npm login --registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm
-
-
       - name: Set registry settings
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITEA_NPM_REGISTRY }}
         run: |
-          echo "registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm" > ~/.npmrc
-          echo "//gitea.midpathsoftware.com/api/packages/gnpaone/npm/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
-          echo '@rrweb:registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/' >> ~/.npmrc
+          cat << EOF > "$HOME/.npmrc"
+            registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
+            @rrweb:registry=https://gitea.midpathsoftware.com/api/packages/gnpaone/npm/
+            //gitea.midpathsoftware.com/api/packages/gnpaone/npm/:_authToken="${NODE_AUTH_TOKEN}"
+          EOF
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
